@@ -1,0 +1,362 @@
+// =========================================
+// HOME: sezioni aggiuntive della pagina principale
+// =========================================
+
+// ---------- Hero: ensō, badge, etichette fluttuanti ----------
+.hero {
+  position: relative;
+
+  &__visual {
+    position: relative;
+    flex: 0 0 auto;
+    padding: 1.5rem;
+  }
+
+  // Cerchio zen dietro la foto
+  &__visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    @include from-md {
+      inset: -8%;
+    }
+
+    background: url("../img/enso.svg") center / contain no-repeat;
+    animation: spin-slow 60s linear infinite;
+    z-index: 0;
+  }
+
+  &__photo {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// Badge "Disponibile per..."
+.badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3fa66b;
+    animation: pulse 2s ease-in-out infinite;
+  }
+}
+
+// Etichette che fluttuano intorno alla foto
+.float-chip {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 12px;
+  background: $color-surface;
+  box-shadow: $shadow;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  animation: float 5s ease-in-out infinite;
+
+  i {
+    color: $color-accent;
+    font-size: 1.1rem;
+  }
+
+  &--top {
+    top: 8%;
+    left: 0;
+
+    @include from-md {
+      left: -6%;
+    }
+  }
+
+  &--bottom {
+    bottom: 10%;
+    right: 0;
+    animation-delay: -2.5s;
+
+    @include from-md {
+      right: -4%;
+    }
+  }
+}
+
+// ---------- Fascia numeri (CSS GRID) ----------
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: $color-border;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  overflow: hidden;
+
+  @include from-md {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &__item {
+    background: $color-surface;
+    padding: 1.75rem 1rem;
+    text-align: center;
+  }
+
+  &__num {
+    display: block;
+    font-family: $font-heading;
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 1;
+    color: $color-accent;
+  }
+
+  &__label {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: $color-muted;
+  }
+}
+
+// ---------- Citazione in "Chi sono" ----------
+.quote {
+  font-family: $font-heading;
+  font-style: italic;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  color: $color-primary;
+  padding-left: 1.25rem;
+  border-left: 4px solid $color-accent;
+  margin-top: 1rem;
+
+  footer {
+    margin-top: 0.75rem;
+    font-family: $font-body;
+    font-style: normal;
+    font-size: 0.9rem;
+    color: $color-muted;
+  }
+}
+
+// ---------- Cosa porto (CSS GRID) ----------
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @include from-md {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.value-card {
+  @include card;
+  padding: 2rem;
+  position: relative;
+  transition: transform $transition, border-color $transition;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: $color-accent;
+  }
+
+  &__num {
+    font-family: $font-heading;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: $color-accent;
+  }
+
+  &__icon {
+    @include flex-center;
+    width: 52px;
+    height: 52px;
+    margin: 1rem 0;
+    border-radius: 14px;
+    background: rgba($color-accent, 0.15);
+    color: $color-primary;
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  p {
+    color: $color-muted;
+    margin-bottom: 0;
+  }
+}
+
+// ---------- Fascia animata con le competenze ----------
+.marquee {
+  overflow: hidden;
+  background: $color-primary;
+  color: $color-bg;
+  padding: 1.1rem 0;
+
+  &__track {
+    display: flex;
+    width: max-content;
+    animation: scroll-x 35s linear infinite;
+  }
+
+  span {
+    font-family: $font-heading;
+    font-size: 1.35rem;
+    font-style: italic;
+    padding: 0 1.5rem;
+    white-space: nowrap;
+
+    &::after {
+      content: "✦";
+      font-style: normal;
+      color: $color-accent;
+      margin-left: 3rem;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// ---------- Il mio percorso (FLEXBOX) ----------
+.journey {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  @include from-md {
+    flex-direction: row;
+  }
+
+  &__step {
+    @include card;
+    flex: 1;
+    padding: 1.5rem;
+    border-top: 4px solid $color-accent;
+  }
+
+  &__place {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $color-muted;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    margin: 0.6rem 0 0.4rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: $color-muted;
+    margin: 0;
+  }
+}
+
+// ---------- Call to action scura ----------
+.cta {
+  background: $color-primary;
+  color: $color-bg;
+  border-radius: 24px;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  @include from-md {
+    padding: 4.5rem 3rem;
+  }
+
+  // Ensō decorativo nell'angolo
+  &::after {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    right: -70px;
+    bottom: -90px;
+    background: url("../img/enso.svg") center / contain no-repeat;
+    opacity: 0.35;
+  }
+
+  h2 {
+    color: $color-bg;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+  }
+
+  p {
+    color: rgba($color-bg, 0.75);
+  }
+
+  .btn-brand {
+    background: $color-accent;
+    color: $color-primary;
+
+    &:hover {
+      background: lighten($color-accent, 8%);
+      color: $color-primary;
+    }
+  }
+}
+
+// ---------- Animazioni ----------
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(63, 166, 107, 0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(63, 166, 107, 0); }
+}
+
+@keyframes scroll-x {
+  to { transform: translateX(-50%); }
+}
+
+// Entrata morbida degli elementi della hero
+.fade-up {
+  animation: fade-up 0.8s ease both;
+
+  &.delay-1 { animation-delay: 0.15s; }
+  &.delay-2 { animation-delay: 0.3s; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+
+// Rispetta chi preferisce meno movimento
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

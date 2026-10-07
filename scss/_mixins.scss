@@ -1,0 +1,25 @@
+// =========================================
+// MIXIN: blocchi di stile riutilizzabili
+// =========================================
+
+// Media query "da tablet in su"
+@mixin from-md {
+  @media (min-width: $bp-md) {
+    @content;
+  }
+}
+
+// Card con sfondo, bordo e ombra
+@mixin card {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  box-shadow: $shadow;
+}
+
+// Centra il contenuto con Flexbox
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

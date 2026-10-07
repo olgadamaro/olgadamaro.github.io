@@ -1,0 +1,297 @@
+// =========================================
+// COMPONENTI: hero, skill, progetti, CV, form, footer
+// =========================================
+
+// ---------- Bottoni ----------
+.btn-brand {
+  background: $color-primary;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.7rem 1.6rem;
+  font-weight: 600;
+  transition: transform $transition, background $transition;
+
+  &:hover {
+    background: darken($color-primary, 6%);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+}
+
+.btn-outline-brand {
+  border: 2px solid $color-primary;
+  color: $color-primary;
+  border-radius: 999px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+
+  &:hover {
+    background: $color-primary;
+    color: #fff;
+  }
+}
+
+// ---------- Hero (FLEXBOX) ----------
+.hero {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 2.5rem;
+  min-height: 80vh;
+  padding: 3rem 0;
+
+  @include from-md {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__text {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.1;
+    margin: 0.5rem 0 1.25rem;
+
+    span {
+      color: $color-primary;
+      font-style: italic;
+    }
+  }
+
+  &__lead {
+    font-size: 1.15rem;
+    color: $color-muted;
+    max-width: 34rem;
+  }
+
+  &__photo {
+    flex: 0 0 auto;
+    width: min(70vw, 320px);
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 6px solid $color-surface;
+    box-shadow: $shadow;
+    object-fit: cover;
+  }
+}
+
+// ---------- Link social (FLEXBOX) ----------
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+
+  a {
+    @include flex-center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid $color-border;
+    background: $color-surface;
+    color: $color-ink;
+    font-size: 1.15rem;
+    transition: background $transition, color $transition;
+
+    &:hover {
+      background: $color-primary;
+      color: #fff;
+    }
+  }
+}
+
+// ---------- Skill (CSS GRID) ----------
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.skill {
+  @include card;
+  padding: 1.25rem;
+  text-align: center;
+  font-weight: 600;
+
+  i {
+    display: block;
+    font-size: 2rem;
+    color: $color-primary;
+    margin-bottom: 0.5rem;
+  }
+}
+
+// ---------- Progetti (CSS GRID) ----------
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @include from-md {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.project {
+  @include card;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform $transition;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  &__img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: $color-border;
+  }
+
+  &__body {
+    padding: 1.5rem;
+    flex: 1;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    margin: 0 0.3rem 0.3rem 0;
+    border-radius: 999px;
+    background: rgba($color-accent, 0.2);
+    color: darken($color-accent, 30%);
+  }
+}
+
+// ---------- Pagina CV (CSS GRID) ----------
+.cv-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @include from-md {
+    grid-template-columns: 280px 1fr;
+  }
+}
+
+.cv-sidebar {
+  @include card;
+  padding: 2rem;
+  align-self: start;
+
+  @include from-md {
+    position: sticky;
+    top: 90px;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+  }
+}
+
+.timeline {
+  list-style: none;
+  padding-left: 1.5rem;
+  border-left: 3px solid $color-border;
+
+  li {
+    position: relative;
+    margin-bottom: 2rem;
+
+    // Pallino sulla linea
+    &::before {
+      content: "";
+      position: absolute;
+      left: -2.05rem;
+      top: 0.4rem;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: $color-accent;
+      border: 3px solid $color-bg;
+    }
+  }
+
+  .date {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $color-muted;
+  }
+}
+
+// ---------- Form contatti ----------
+.contact-card {
+  @include card;
+  padding: 2rem;
+
+  @include from-md {
+    padding: 3rem;
+  }
+
+  .form-control:focus {
+    border-color: $color-primary;
+    box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.15);
+  }
+}
+
+// ---------- Footer ----------
+.site-footer {
+  background: $color-primary;
+  color: rgba(#fff, 0.8);
+  padding: 3.5rem 0 1.5rem;
+  font-size: 0.9rem;
+
+  a {
+    color: rgba(#fff, 0.8);
+    text-decoration: none;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  &__brand {
+    font-family: $font-heading;
+    font-size: 1.6rem;
+    color: #fff;
+  }
+
+  &__title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: $color-accent;
+    margin-bottom: 0.75rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li + li {
+      margin-top: 0.35rem;
+    }
+  }
+
+  &__bottom {
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(#fff, 0.15);
+    font-size: 0.8rem;
+
+    a {
+      color: $color-accent;
+    }
+  }
+}

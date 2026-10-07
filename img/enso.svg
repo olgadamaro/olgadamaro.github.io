@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- Ensō: il cerchio zen tracciato con un solo gesto di pennello -->
+  <path d="M318 112c34 46 36 118-4 166-44 54-128 72-190 38C58 280 38 196 74 136c32-54 98-84 160-72 28 6 54 18 72 36"
+        fill="none" stroke="#c99a3d" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
+  <path d="M306 100c6 4 10 8 12 12" fill="none" stroke="#c99a3d" stroke-width="7" stroke-linecap="round" opacity="0.6"/>
+</svg>

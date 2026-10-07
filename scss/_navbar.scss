@@ -1,0 +1,33 @@
+// =========================================
+// NAVBAR: menu sticky (classe Bootstrap .sticky-top)
+// =========================================
+
+.site-nav {
+  background: rgba($color-bg, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid $color-border;
+
+  .navbar-brand {
+    font-family: $font-heading;
+    font-weight: 700;
+    color: $color-primary;
+  }
+
+  .nav-link {
+    font-weight: 500;
+    color: $color-ink;
+    transition: color $transition;
+
+    &:hover,
+    &.active {
+      color: $color-primary;
+    }
+
+    &.active {
+      text-decoration: underline;
+      text-decoration-color: $color-accent;
+      text-decoration-thickness: 3px;
+      text-underline-offset: 6px;
+    }
+  }
+}

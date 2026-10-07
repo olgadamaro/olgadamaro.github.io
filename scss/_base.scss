@@ -1,0 +1,58 @@
+// =========================================
+// BASE: stili generali della pagina
+// =========================================
+
+body {
+  background: $color-bg;
+  color: $color-ink;
+  font-family: $font-body;
+  line-height: 1.65;
+}
+
+h1,
+h2,
+h3 {
+  font-family: $font-heading;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: $color-primary;
+
+  &:hover {
+    color: darken($color-primary, 8%);
+  }
+}
+
+.section {
+  padding: 4rem 0;
+
+  @include from-md {
+    padding: 6rem 0;
+  }
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+
+  // Piccola linea oro sotto il titolo
+  &::after {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 4px;
+    margin-top: 0.75rem;
+    background: $color-accent;
+    border-radius: 4px;
+  }
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: $color-muted;
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contattami | Olga D'Amaro</title>
+  <meta name="description" content="Scrivi a Olga D'Amaro per collaborazioni, stage o progetti.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contatta Olga D'Amaro">
+  <meta property="og:description" content="Hai un progetto o una posizione aperta? Scrivimi.">
+  <meta property="og:image" content="https://olgadamaro.github.io/img/og-image.png">
+  <meta property="og:url" content="https://olgadamaro.github.io/contatti.html">
+  <meta property="og:locale" content="it_IT">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-md sticky-top site-nav">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Olga D'Amaro</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Apri il menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto gap-md-3">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#progetti">Progetti</a></li>
+          <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="contatti.html">Contattami</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="section">
+    <div class="container">
+      <div class="row g-4 g-lg-5">
+        <div class="col-lg-5">
+          <p class="eyebrow">Contatti</p>
+          <h1 class="mb-4">Parliamo del tuo progetto.</h1>
+          <p class="text-secondary">Che si tratti di uno stage, di una collaborazione o di un progetto a impatto sociale, compila il modulo: ti rispondo entro 48 ore.</p>
+          <p class="text-secondary">Preferisci i social? Mi trovi anche qui:</p>
+          <ul class="socials" aria-label="I miei profili">
+            <li><a href="https://github.com/olgadamaro" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/olga-damaro/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-7">
+          <!-- Il form invia i messaggi via Formspree senza mostrare la mia email nel codice -->
+          <form class="contact-card" action="https://formspree.io/f/mgaoazob" method="POST">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="nome" class="form-label">Nome *</label>
+                <input type="text" class="form-control" id="nome" name="nome" autocomplete="name" required>
+              </div>
+              <div class="col-md-6">
+                <label for="email" class="form-label">Email *</label>
+                <input type="email" class="form-control" id="email" name="email" autocomplete="email" required>
+              </div>
+              <div class="col-12">
+                <label for="motivo" class="form-label">Motivo del contatto *</label>
+                <select class="form-select" id="motivo" name="motivo" required>
+                  <option value="" selected disabled>Scegli un'opzione</option>
+                  <option>Offerta di lavoro o stage</option>
+                  <option>Collaborazione su un progetto</option>
+                  <option>Altro</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label for="messaggio" class="form-label">Messaggio *</label>
+                <textarea class="form-control" id="messaggio" name="messaggio" rows="5" minlength="10" required></textarea>
+              </div>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="privacy" name="privacy" required>
+                  <label class="form-check-label small" for="privacy">Acconsento al trattamento dei dati per essere ricontattato *</label>
+                </div>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-brand">Invia messaggio <i class="bi bi-send"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-5">
+          <p class="site-footer__brand mb-2">Olga D'Amaro</p>
+          <p class="mb-0">Growth marketing, agenti AI e innovazione sociale.<br>Tra Salerno e Würzburg.</p>
+        </div>
+        <div class="col-6 col-md-3">
+          <p class="site-footer__title">Pagine</p>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cv.html">CV</a></li>
+            <li><a href="contatti.html">Contattami</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-4">
+          <p class="site-footer__title">Trovami su</p>
+          <ul>
+            <li><a href="https://www.linkedin.com/in/olga-damaro/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a></li>
+            <li><a href="https://github.com/olgadamaro" target="_blank" rel="noopener"><i class="bi bi-github"></i> GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom d-flex flex-column flex-md-row justify-content-between gap-2">
+        <span>© 2026 Olga D'Amaro</span>
+        <span>Realizzato con HTML, Sass e Bootstrap · <a href="https://github.com/olgadamaro/olgadamaro.github.io" target="_blank" rel="noopener">Codice su GitHub</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

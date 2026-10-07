@@ -1,0 +1,26 @@
+// =========================================
+// VARIABILI: colori, font, spaziature
+// Cambiando questi valori cambia tutto il sito
+// =========================================
+
+// Colori
+$color-bg: #f5efe6;        // sabbia
+$color-surface: #ffffff;   // card
+$color-ink: #2a211c;       // testo principale
+$color-muted: #6e6258;     // testo secondario
+$color-primary: #3b2a22;   // marrone scuro
+$color-accent: #c99a3d;    // oro
+$color-border: #e6dacb;
+
+// Font
+$font-heading: "Fraunces", Georgia, serif;
+$font-body: "Inter", system-ui, sans-serif;
+
+// Misure
+$radius: 14px;
+$shadow: 0 10px 30px rgba(28, 35, 33, 0.08);
+$transition: 0.25s ease;
+
+// Breakpoint (uguali a Bootstrap)
+$bp-md: 768px;
+$bp-lg: 992px;
