@@ -2,7 +2,7 @@
 // BOOTSTRAP compilato dai sorgenti Sass con i colori del sito.
 // Così bottoni, focus, select e checkbox usano il marrone
 // e non il blu predefinito di Bootstrap.
-// I sorgenti sono in scss/vendor/bootstrap (versione 5.3.3).
+// I sorgenti arrivano da npm (bootstrap 5.3.3, vedi package.json).
 // =========================================
 
 @use "variables" as v;

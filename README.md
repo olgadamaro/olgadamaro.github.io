@@ -44,20 +44,23 @@ Portfolio personale in HTML, Sass e Bootstrap 5.
 │   ├── _navbar.scss       ← menu sticky e apertura su mobile solo CSS
 │   ├── _components.scss   ← bottoni, social, skill, caso di studio, form, footer
 │   ├── _home.scss         ← hero e sezioni della home, animazioni
-│   ├── _cv.scss           ← layout del CV e timeline
-│   └── vendor/bootstrap/  ← sorgenti Sass di Bootstrap 5.3.3 (licenza MIT)
-└── img/
+│   └── _cv.scss           ← layout del CV e timeline
+├── img/
+├── package.json           ← Bootstrap 5.3.3 e Sass come dipendenze npm
+└── .gitignore             ← esclude node_modules/
 ```
 
 ## Come compilare gli stili
-Serve [Dart Sass](https://sass-lang.com/install/). Dalla cartella del progetto:
+Bootstrap non è copiato nel repository: si installa con npm, come in un progetto professionale.
+Serve [Node.js](https://nodejs.org/). Dalla cartella del progetto:
 
 ```
-sass --load-path=scss/vendor --quiet-deps --no-source-map --style=compressed scss/style.scss css/style.css
+npm install      # scarica Bootstrap 5.3.3 e Sass in node_modules/
+npm run build    # compila scss/style.scss in css/style.css
+npm run watch    # ricompila a ogni modifica
 ```
 
-- `--load-path=scss/vendor` permette di scrivere `@use "bootstrap/scss/bootstrap"`
-- `--quiet-deps` nasconde gli avvisi interni a Bootstrap 5.3 (che usa ancora `@import`): il codice del sito compila senza alcun warning
+Lo script usa `--load-path=node_modules` (per scrivere `@use "bootstrap/scss/bootstrap"`) e `--quiet-deps`, che nasconde gli avvisi interni a Bootstrap 5.3: il codice del sito compila senza alcun warning.
 
 ## Pubblicazione con GitHub Pages
 1. Crea un nuovo repository pubblico su GitHub
