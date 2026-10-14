@@ -15,39 +15,49 @@ Portfolio personale in HTML, Sass e Bootstrap 5.
 | Requisito | Dove |
 |---|---|
 | Almeno 2 pagine + CV in HTML | `index.html`, `cv.html`, `contatti.html` |
-| Pagina "contattami" con form e `required` | `contatti.html`, invio tramite Formspree |
-| Framework front end | Bootstrap 5.3 (navbar, griglia, form) |
+| Pagina "contattami" con form e `required` | `contatti.html`, invio tramite Formspree (nessun JavaScript) |
+| Framework front end | Bootstrap 5.3.3 **compilato dai sorgenti Sass** con i colori del sito (`scss/_bootstrap.scss`) |
 | Favicon | `img/favicon.svg` + `img/favicon.png` |
-| Menu sticky | classe `sticky-top` sulla navbar di ogni pagina |
-| Flexbox | hero, link social e percorso (`.hero`, `.socials`, `.journey`) |
-| CSS Grid | numeri, "cosa porto", skill, progetti, layout del CV (`.stats`, `.values-grid`, `.skills-grid`, `.projects-grid`, `.cv-layout`) |
-| Tocco personale | ensō (cerchio zen) animato, etichette fluttuanti, fascia scorrevole: solo CSS, con rispetto di `prefers-reduced-motion` |
-| Sass | cartella `scss/` (variabili, mixin, partial, nesting) |
+| Menu sticky | `.site-nav` con `position: sticky` su tutte le pagine |
+| Menu mobile senza JavaScript | checkbox + `<label>` e selettori `:checked ~` in `scss/_navbar.scss` |
+| Flexbox | hero, percorso, menu (`.hero`, `.journey`, `.site-nav__inner`) |
+| CSS Grid | numeri, "cosa porto", skill, caso di studio, layout del CV (`.stats`, `.values-grid`, `.skills-grid`, `.case-study`, `.cv-layout`) |
+| Sass | moduli `@use`, variabili, mixin, nesting, BEM, funzioni `color.adjust()` / `color.scale()` |
 | Open Graph | `<meta property="og:...">` in ogni pagina |
-| 100% responsive | mobile first, testato a 390px e 1280px |
+| 100% responsive | mobile first, testato da 390px a 1440px |
+| Accessibilità | contrasti verificati (testo ≥ 4.5:1), focus visibile da tastiera, menu usabile con Tab e barra spaziatrice, `alt`, `prefers-reduced-motion` |
+
+**JavaScript: zero.** Nessuno script viene caricato.
 
 ## Struttura
 ```
 ├── index.html
 ├── cv.html
 ├── contatti.html
-├── css/style.css        ← generato da Sass, non modificarlo a mano
+├── css/style.css          ← generato da Sass (Bootstrap + stili del sito), non modificarlo a mano
 ├── scss/
-│   ├── style.scss       ← file principale
-│   ├── _variables.scss  ← colori, font, misure
-│   ├── _mixins.scss
-│   ├── _base.scss
-│   ├── _navbar.scss
-│   ├── _components.scss
-│   └── _home.scss       ← sezioni e animazioni della home
+│   ├── style.scss         ← file principale: carica i moduli con @use
+│   ├── _variables.scss    ← colori, font, misure, breakpoint
+│   ├── _mixins.scss       ← from-md, from-lg, card, flex-center, visually-hidden
+│   ├── _bootstrap.scss    ← Bootstrap configurato con i colori del sito
+│   ├── _base.scss         ← tipografia, sezioni, focus
+│   ├── _navbar.scss       ← menu sticky e apertura su mobile solo CSS
+│   ├── _components.scss   ← bottoni, social, skill, caso di studio, form, footer
+│   ├── _home.scss         ← hero e sezioni della home, animazioni
+│   ├── _cv.scss           ← layout del CV e timeline
+│   └── vendor/bootstrap/  ← sorgenti Sass di Bootstrap 5.3.3 (licenza MIT)
 └── img/
 ```
 
-## Come modificare gli stili
-1. Installa in VS Code l'estensione **Live Sass Compiler** (di Glenn Marks)
-2. Nelle impostazioni dell'estensione imposta come cartella di output `/css`
-3. Apri `scss/style.scss` e clicca **Watch Sass** in basso
-4. Ora ogni modifica ai file `.scss` aggiorna automaticamente `css/style.css`
+## Come compilare gli stili
+Serve [Dart Sass](https://sass-lang.com/install/). Dalla cartella del progetto:
+
+```
+sass --load-path=scss/vendor --quiet-deps --no-source-map --style=compressed scss/style.scss css/style.css
+```
+
+- `--load-path=scss/vendor` permette di scrivere `@use "bootstrap/scss/bootstrap"`
+- `--quiet-deps` nasconde gli avvisi interni a Bootstrap 5.3 (che usa ancora `@import`): il codice del sito compila senza alcun warning
 
 ## Pubblicazione con GitHub Pages
 1. Crea un nuovo repository pubblico su GitHub
