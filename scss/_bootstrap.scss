@@ -1,0 +1,40 @@
+// =========================================
+// BOOTSTRAP compilato dai sorgenti Sass con i colori del sito.
+// Così bottoni, focus, select e checkbox usano il marrone
+// e non il blu predefinito di Bootstrap.
+// I sorgenti sono in scss/vendor/bootstrap (versione 5.3.3).
+// =========================================
+
+@use "variables" as v;
+
+@use "bootstrap/scss/bootstrap" with (
+  // Colori
+  $primary: v.$color-primary,
+  $secondary: v.$color-muted,
+  $body-bg: v.$color-bg,
+  $body-color: v.$color-ink,
+  $body-secondary-color: v.$color-muted,
+  $link-color: v.$color-primary,
+  $link-hover-color: v.$color-ink,
+  $border-color: v.$color-border,
+
+  // Tipografia
+  $font-family-sans-serif: v.$font-body,
+  $headings-font-family: v.$font-heading,
+  $headings-font-weight: 600,
+  $line-height-base: 1.65,
+
+  // Form: bordi visibili e focus marrone
+  $input-border-color: v.$color-field,
+  $input-focus-border-color: v.$color-primary,
+  $form-select-focus-border-color: v.$color-primary,
+  $form-check-input-border: 1px solid v.$color-field,
+  $form-check-input-focus-border: v.$color-primary,
+
+  // Anello di focus coerente con il sito
+  $focus-ring-color: rgba(v.$color-accent, 0.5),
+  $input-btn-focus-color: rgba(v.$color-accent, 0.5),
+
+  // Il sito usa il proprio scroll fluido
+  $enable-smooth-scroll: false
+);

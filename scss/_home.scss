@@ -1,35 +1,84 @@
 // =========================================
-// HOME: sezioni aggiuntive della pagina principale
+// HOME: tutte le regole della pagina principale,
+// hero compresa (prima era divisa tra due file)
 // =========================================
 
-// ---------- Hero: ensō, badge, etichette fluttuanti ----------
+@use "variables" as *;
+@use "mixins" as *;
+
+// ---------- Hero (FLEXBOX) ----------
 .hero {
   position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem 0 3rem;
 
+  @include from-md {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2.5rem;
+    min-height: 80vh;
+    padding: 3rem 0;
+  }
+
+  &__text {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.1;
+    margin: 0.5rem 0 1.25rem;
+
+    em {
+      color: $color-primary;
+    }
+  }
+
+  &__lead {
+    max-width: 34rem;
+    font-size: 1.05rem;
+    color: $color-muted;
+
+    @include from-md {
+      font-size: 1.15rem;
+    }
+  }
+
+  // Contenitore di foto, ensō ed etichette
   &__visual {
     position: relative;
     flex: 0 0 auto;
+    margin: 0;
     padding: 1.5rem;
-  }
 
-  // Cerchio zen dietro la foto
-  &__visual::before {
-    content: "";
-    position: absolute;
-    inset: 0;
+    // Cerchio zen dietro la foto
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: url("../img/enso.svg") center / contain no-repeat;
+      animation: spin-slow 60s linear infinite;
 
-    @include from-md {
-      inset: -8%;
+      @include from-md {
+        inset: -8%;
+      }
     }
-
-    background: url("../img/enso.svg") center / contain no-repeat;
-    animation: spin-slow 60s linear infinite;
-    z-index: 0;
   }
 
   &__photo {
     position: relative;
     z-index: 1;
+    width: min(60vw, 320px);
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 6px solid $color-surface;
+    box-shadow: $shadow;
+    object-fit: cover;
   }
 }
 
@@ -39,7 +88,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.35rem 0.9rem;
-  border-radius: 999px;
+  border-radius: $radius-pill;
   background: $color-surface;
   border: 1px solid $color-border;
   font-size: 0.85rem;
@@ -49,7 +98,7 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #3fa66b;
+    background: $color-success;
     animation: pulse 2s ease-in-out infinite;
   }
 }
@@ -65,14 +114,18 @@
   border-radius: 12px;
   background: $color-surface;
   box-shadow: $shadow;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 600;
   white-space: nowrap;
   animation: float 5s ease-in-out infinite;
 
   i {
-    color: $color-accent;
+    color: $color-accent-text;
     font-size: 1.1rem;
+  }
+
+  @include from-md {
+    font-size: 0.85rem;
   }
 
   &--top {
@@ -95,11 +148,12 @@
   }
 }
 
-// ---------- Fascia numeri (CSS GRID) ----------
+// ---------- Numeri: una lista di definizioni <dl> (CSS GRID) ----------
 .stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1px;
+  margin: 0;
   background: $color-border;
   border: 1px solid $color-border;
   border-radius: $radius;
@@ -109,44 +163,67 @@
     grid-template-columns: repeat(4, 1fr);
   }
 
+  // Nel codice l'etichetta (dt) viene prima del valore (dd):
+  // column-reverse mostra il numero sopra
   &__item {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    padding: 1.25rem 0.75rem;
     background: $color-surface;
-    padding: 1.75rem 1rem;
     text-align: center;
+
+    @include from-md {
+      padding: 1.75rem 1rem;
+    }
   }
 
   &__num {
-    display: block;
+    margin: 0;
     font-family: $font-heading;
-    font-size: 2.6rem;
+    font-size: 2.2rem;
     font-weight: 700;
     line-height: 1;
-    color: $color-accent;
+    color: $color-accent-text;
+
+    @include from-md {
+      font-size: 2.6rem;
+    }
   }
 
   &__label {
-    display: block;
     margin-top: 0.5rem;
     font-size: 0.9rem;
+    font-weight: 400;
     color: $color-muted;
   }
 }
 
-// ---------- Citazione in "Chi sono" ----------
+// ---------- Citazione in "Chi sono": <figure> + <figcaption> ----------
 .quote {
-  font-family: $font-heading;
-  font-style: italic;
-  font-size: 1.5rem;
-  line-height: 1.4;
-  color: $color-primary;
+  margin: 1rem 0 0;
   padding-left: 1.25rem;
   border-left: 4px solid $color-accent;
-  margin-top: 1rem;
 
-  footer {
+  blockquote {
+    margin: 0;
+    font-family: $font-heading;
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: $color-primary;
+
+    p {
+      margin: 0;
+    }
+
+    @include from-md {
+      font-size: 1.5rem;
+    }
+  }
+
+  figcaption {
     margin-top: 0.75rem;
-    font-family: $font-body;
-    font-style: normal;
     font-size: 0.9rem;
     color: $color-muted;
   }
@@ -165,8 +242,8 @@
 
 .value-card {
   @include card;
-  padding: 2rem;
   position: relative;
+  padding: 1.5rem;
   transition: transform $transition, border-color $transition;
 
   &:hover {
@@ -174,18 +251,22 @@
     border-color: $color-accent;
   }
 
+  @include from-md {
+    padding: 2rem;
+  }
+
   &__num {
     font-family: $font-heading;
     font-size: 0.95rem;
     font-weight: 700;
-    color: $color-accent;
+    color: $color-accent-text;
   }
 
   &__icon {
     @include flex-center;
     width: 52px;
     height: 52px;
-    margin: 1rem 0;
+    margin: 0.75rem 0;
     border-radius: 14px;
     background: rgba($color-accent, 0.15);
     color: $color-primary;
@@ -202,7 +283,7 @@
   }
 }
 
-// ---------- Fascia animata con le competenze ----------
+// ---------- Fascia animata con i valori personali ----------
 .marquee {
   overflow: hidden;
   background: $color-primary;
@@ -216,18 +297,22 @@
   }
 
   span {
+    padding: 0 1.25rem;
     font-family: $font-heading;
-    font-size: 1.35rem;
+    font-size: 1.15rem;
     font-style: italic;
-    padding: 0 1.5rem;
     white-space: nowrap;
 
     &::after {
       content: "✦";
-      font-style: normal;
-      color: $color-accent;
       margin-left: 3rem;
+      font-style: normal;
       font-size: 0.9rem;
+      color: $color-accent;
+    }
+
+    @include from-md {
+      font-size: 1.35rem;
     }
   }
 }
@@ -277,21 +362,17 @@
 
 // ---------- Call to action scura ----------
 .cta {
-  background: $color-primary;
-  color: $color-bg;
-  border-radius: 24px;
-  padding: 3rem 1.5rem;
-  text-align: center;
   position: relative;
   overflow: hidden;
+  padding: 2.5rem 1.25rem;
+  border-radius: 24px;
+  background: $color-primary;
+  color: $color-bg;
+  text-align: center;
 
-  @include from-md {
-    padding: 4.5rem 3rem;
-  }
-
-  // Ensō decorativo nell'angolo
+  // Ensō decorativo nell'angolo (solo da tablet in su: su mobile copriva il pulsante)
   &::after {
-    content: "";
+    content: none;
     position: absolute;
     width: 260px;
     height: 260px;
@@ -299,6 +380,14 @@
     bottom: -90px;
     background: url("../img/enso.svg") center / contain no-repeat;
     opacity: 0.35;
+
+    @include from-md {
+      content: "";
+    }
+  }
+
+  @include from-md {
+    padding: 4.5rem 3rem;
   }
 
   h2 {
@@ -308,16 +397,6 @@
 
   p {
     color: rgba($color-bg, 0.75);
-  }
-
-  .btn-brand {
-    background: $color-accent;
-    color: $color-primary;
-
-    &:hover {
-      background: lighten($color-accent, 8%);
-      color: $color-primary;
-    }
   }
 }
 
@@ -332,8 +411,8 @@
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(63, 166, 107, 0.5); }
-  50% { box-shadow: 0 0 0 6px rgba(63, 166, 107, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba($color-success, 0.5); }
+  50% { box-shadow: 0 0 0 6px rgba($color-success, 0); }
 }
 
 @keyframes scroll-x {

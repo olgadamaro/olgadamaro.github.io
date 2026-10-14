@@ -1,81 +1,69 @@
 // =========================================
-// COMPONENTI: hero, skill, progetti, CV, form, footer
+// COMPONENTI condivisi: bottoni, social, skill, progetti, form, footer
 // =========================================
 
+@use "sass:color";
+@use "variables" as *;
+@use "mixins" as *;
+
 // ---------- Bottoni ----------
-.btn-brand {
-  background: $color-primary;
-  color: #fff;
-  border-radius: 999px;
-  padding: 0.7rem 1.6rem;
-  font-weight: 600;
-  transition: transform $transition, background $transition;
+// Si estende Bootstrap nel modo previsto: impostando le sue custom property
+// per ogni stato (normale, hover, active, disabled, focus).
+.btn-brand,
+.btn-outline-brand,
+.btn-gold {
+  --bs-btn-font-weight: 600;
+  --bs-btn-padding-x: 1.6rem;
+  --bs-btn-padding-y: 0.7rem;
+  --bs-btn-border-width: 2px;
+  --bs-btn-border-radius: #{$radius-pill};
+  --bs-btn-focus-shadow-rgb: #{color.channel($color-accent, "red", $space: rgb)}, #{color.channel($color-accent, "green", $space: rgb)}, #{color.channel($color-accent, "blue", $space: rgb)};
+
+  transition: transform $transition, background-color $transition, color $transition;
 
   &:hover {
-    background: darken($color-primary, 6%);
-    color: #fff;
     transform: translateY(-2px);
   }
 }
 
-.btn-outline-brand {
-  border: 2px solid $color-primary;
-  color: $color-primary;
-  border-radius: 999px;
-  padding: 0.6rem 1.5rem;
-  font-weight: 600;
-
-  &:hover {
-    background: $color-primary;
-    color: #fff;
-  }
+.btn-brand {
+  --bs-btn-color: #{$color-surface};
+  --bs-btn-bg: #{$color-primary};
+  --bs-btn-border-color: #{$color-primary};
+  --bs-btn-hover-color: #{$color-surface};
+  --bs-btn-hover-bg: #{color.adjust($color-primary, $lightness: -6%)};
+  --bs-btn-hover-border-color: #{color.adjust($color-primary, $lightness: -6%)};
+  --bs-btn-active-color: #{$color-surface};
+  --bs-btn-active-bg: #{color.adjust($color-primary, $lightness: -10%)};
+  --bs-btn-active-border-color: #{color.adjust($color-primary, $lightness: -10%)};
+  --bs-btn-disabled-color: #{$color-surface};
+  --bs-btn-disabled-bg: #{$color-primary};
+  --bs-btn-disabled-border-color: #{$color-primary};
 }
 
-// ---------- Hero (FLEXBOX) ----------
-.hero {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  gap: 2.5rem;
-  min-height: 80vh;
-  padding: 3rem 0;
+.btn-outline-brand {
+  --bs-btn-color: #{$color-primary};
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: #{$color-primary};
+  --bs-btn-hover-color: #{$color-surface};
+  --bs-btn-hover-bg: #{$color-primary};
+  --bs-btn-hover-border-color: #{$color-primary};
+  --bs-btn-active-color: #{$color-surface};
+  --bs-btn-active-bg: #{color.adjust($color-primary, $lightness: -6%)};
+  --bs-btn-active-border-color: #{color.adjust($color-primary, $lightness: -6%)};
+}
 
-  @include from-md {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  &__text {
-    flex: 1;
-  }
-
-  &__title {
-    font-size: clamp(2.4rem, 6vw, 4rem);
-    line-height: 1.1;
-    margin: 0.5rem 0 1.25rem;
-
-    span {
-      color: $color-primary;
-      font-style: italic;
-    }
-  }
-
-  &__lead {
-    font-size: 1.15rem;
-    color: $color-muted;
-    max-width: 34rem;
-  }
-
-  &__photo {
-    flex: 0 0 auto;
-    width: min(70vw, 320px);
-    height: auto;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: 6px solid $color-surface;
-    box-shadow: $shadow;
-    object-fit: cover;
-  }
+// Variante oro, per i fondi scuri (call to action)
+.btn-gold {
+  --bs-btn-color: #{$color-primary};
+  --bs-btn-bg: #{$color-accent};
+  --bs-btn-border-color: #{$color-accent};
+  --bs-btn-hover-color: #{$color-primary};
+  --bs-btn-hover-bg: #{color.scale($color-accent, $lightness: 20%)};
+  --bs-btn-hover-border-color: #{color.scale($color-accent, $lightness: 20%)};
+  --bs-btn-active-color: #{$color-primary};
+  --bs-btn-active-bg: #{color.scale($color-accent, $lightness: 30%)};
+  --bs-btn-active-border-color: #{color.scale($color-accent, $lightness: 30%)};
 }
 
 // ---------- Link social (FLEXBOX) ----------
@@ -99,7 +87,7 @@
 
     &:hover {
       background: $color-primary;
-      color: #fff;
+      color: $color-surface;
     }
   }
 }
@@ -109,6 +97,9 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .skill {
@@ -123,135 +114,122 @@
     color: $color-primary;
     margin-bottom: 0.5rem;
   }
-}
 
-// ---------- Progetti (CSS GRID) ----------
-.projects-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-
-  @include from-md {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.project {
-  @include card;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform $transition;
-
-  &:hover {
-    transform: translateY(-4px);
-  }
-
-  &__img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    background: $color-border;
-  }
-
-  &__body {
-    padding: 1.5rem;
-    flex: 1;
-  }
-
-  .tag {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.2rem 0.6rem;
-    margin: 0 0.3rem 0.3rem 0;
-    border-radius: 999px;
-    background: rgba($color-accent, 0.2);
-    color: darken($color-accent, 30%);
-  }
-}
-
-// ---------- Pagina CV (CSS GRID) ----------
-.cv-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-
-  @include from-md {
-    grid-template-columns: 280px 1fr;
-  }
-}
-
-.cv-sidebar {
-  @include card;
-  padding: 2rem;
-  align-self: start;
-
-  @include from-md {
-    position: sticky;
-    top: 90px;
-  }
-
-  h3 {
-    font-size: 1.1rem;
-    margin-top: 1.5rem;
-  }
-}
-
-.timeline {
-  list-style: none;
-  padding-left: 1.5rem;
-  border-left: 3px solid $color-border;
-
-  li {
-    position: relative;
-    margin-bottom: 2rem;
-
-    // Pallino sulla linea
-    &::before {
-      content: "";
-      position: absolute;
-      left: -2.05rem;
-      top: 0.4rem;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: $color-accent;
-      border: 3px solid $color-bg;
-    }
-  }
-
-  .date {
-    font-size: 0.85rem;
-    font-weight: 600;
+  small {
+    display: block;
+    font-weight: 400;
     color: $color-muted;
   }
 }
 
+// ---------- Etichette ----------
+.tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  margin: 0 0.3rem 0.3rem 0;
+  border-radius: $radius-pill;
+  background: rgba($color-accent, 0.2);
+  color: $color-primary;
+}
+
+// ---------- Caso di studio (CSS GRID) ----------
+.case-study {
+  @include card;
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+
+  @include from-lg {
+    grid-template-columns: 1.1fr 1fr;
+  }
+
+  &__media {
+    margin: 0;
+    background: $color-primary;
+    padding: 1.5rem 1.5rem 0;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  &__img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+    box-shadow: $shadow;
+  }
+
+  &__body {
+    padding: 1.5rem;
+
+    @include from-md {
+      padding: 2.5rem;
+    }
+  }
+
+  &__facts {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 1rem;
+    margin: 1.25rem 0;
+
+    dt {
+      font-weight: 600;
+      color: $color-primary;
+    }
+
+    dd {
+      margin: 0;
+      color: $color-muted;
+    }
+  }
+}
+
 // ---------- Form contatti ----------
+// Colori di campi, select e checkbox arrivano da Bootstrap compilato (_bootstrap.scss)
 .contact-card {
   @include card;
-  padding: 2rem;
+  padding: 1.5rem;
 
   @include from-md {
     padding: 3rem;
   }
+}
 
-  .form-control:focus {
-    border-color: $color-primary;
-    box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.15);
+// ---------- Pagina di ringraziamento ----------
+.thanks {
+  @include card;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+
+  @include from-md {
+    padding: 4rem 3rem;
+  }
+
+  &__icon {
+    @include flex-center;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: rgba($color-accent, 0.2);
+    color: $color-primary;
+    font-size: 2rem;
   }
 }
 
 // ---------- Footer ----------
 .site-footer {
   background: $color-primary;
-  color: rgba(#fff, 0.8);
+  color: rgba($color-surface, 0.8);
   padding: 3.5rem 0 1.5rem;
   font-size: 0.9rem;
 
   a {
-    color: rgba(#fff, 0.8);
+    color: rgba($color-surface, 0.8);
     text-decoration: none;
 
     &:hover {
@@ -262,7 +240,7 @@
   &__brand {
     font-family: $font-heading;
     font-size: 1.6rem;
-    color: #fff;
+    color: $color-surface;
   }
 
   &__title {
@@ -270,7 +248,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: $color-accent;
+    color: $color-accent; // oro su marrone: 5.3:1
     margin-bottom: 0.75rem;
   }
 
@@ -287,7 +265,7 @@
   &__bottom {
     margin-top: 2.5rem;
     padding-top: 1.25rem;
-    border-top: 1px solid rgba(#fff, 0.15);
+    border-top: 1px solid rgba($color-surface, 0.15);
     font-size: 0.8rem;
 
     a {

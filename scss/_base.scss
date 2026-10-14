@@ -2,6 +2,14 @@
 // BASE: stili generali della pagina
 // =========================================
 
+@use "sass:color";
+@use "variables" as *;
+@use "mixins" as *;
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: $color-bg;
   color: $color-ink;
@@ -21,12 +29,33 @@ a {
   color: $color-primary;
 
   &:hover {
-    color: darken($color-primary, 8%);
+    color: color.adjust($color-primary, $lightness: -8%);
   }
 }
 
+// Più respiro ai lati su smartphone
+.container {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+// Le ancore (#progetti) non finiscono sotto il menu sticky
+[id] {
+  scroll-margin-top: $nav-height + 16px;
+}
+
+// Focus ben visibile per chi naviga con la tastiera
+a:focus-visible,
+.btn:focus-visible,
+.form-control:focus-visible,
+.form-select:focus-visible,
+.form-check-input:focus-visible {
+  outline: 3px solid $color-accent-text;
+  outline-offset: 2px;
+}
+
 .section {
-  padding: 4rem 0;
+  padding: 3.5rem 0;
 
   @include from-md {
     padding: 6rem 0;
@@ -34,8 +63,8 @@ a {
 }
 
 .section-title {
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
 
   // Piccola linea oro sotto il titolo
   &::after {
@@ -46,6 +75,11 @@ a {
     margin-top: 0.75rem;
     background: $color-accent;
     border-radius: 4px;
+  }
+
+  @include from-md {
+    font-size: 2rem;
+    margin-bottom: 2rem;
   }
 }
 

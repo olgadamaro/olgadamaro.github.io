@@ -1,16 +1,19 @@
 // =========================================
 // VARIABILI: colori, font, spaziature
-// Cambiando questi valori cambia tutto il sito
+// Cambiando questi valori cambia tutto il sito (Bootstrap compreso)
 // =========================================
 
 // Colori
-$color-bg: #f5efe6;        // sabbia
-$color-surface: #ffffff;   // card
-$color-ink: #2a211c;       // testo principale
-$color-muted: #6e6258;     // testo secondario
-$color-primary: #3b2a22;   // marrone scuro
-$color-accent: #c99a3d;    // oro
+$color-bg: #f5efe6;          // sabbia
+$color-surface: #ffffff;     // card
+$color-ink: #2a211c;         // testo principale
+$color-muted: #6e6258;       // testo secondario (5.2:1 sulla sabbia)
+$color-primary: #3b2a22;     // marrone scuro
+$color-accent: #c99a3d;      // oro: decorazioni e testo su fondo scuro (5.3:1 sul marrone)
+$color-accent-text: #8a6420; // oro scuro: testo su fondo chiaro (5.3:1 sul bianco)
 $color-border: #e6dacb;
+$color-field: #958473;       // bordo dei campi del form (3.6:1)
+$color-success: #3fa66b;     // pallino "disponibile"
 
 // Font
 $font-heading: "Fraunces", Georgia, serif;
@@ -18,8 +21,10 @@ $font-body: "Inter", system-ui, sans-serif;
 
 // Misure
 $radius: 14px;
+$radius-pill: 999px;
 $shadow: 0 10px 30px rgba(28, 35, 33, 0.08);
 $transition: 0.25s ease;
+$nav-height: 64px;
 
 // Breakpoint (uguali a Bootstrap)
 $bp-md: 768px;

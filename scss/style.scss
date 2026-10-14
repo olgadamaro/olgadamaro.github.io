@@ -1,11 +1,11 @@
 // =========================================
-// FILE PRINCIPALE: importa tutti i partial
-// Compila questo file in ../css/style.css
+// FILE PRINCIPALE: carica tutti i moduli con @use
+// Si compila in ../css/style.css (comando nel README)
 // =========================================
 
-@import "variables";
-@import "mixins";
-@import "base";
-@import "navbar";
-@import "components";
-@import "home";
+@use "bootstrap";   // Bootstrap dai sorgenti, con i colori del sito
+@use "base";
+@use "navbar";
+@use "components";
+@use "home";
+@use "cv";

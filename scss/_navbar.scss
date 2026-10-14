@@ -1,29 +1,158 @@
 // =========================================
-// NAVBAR: menu sticky (classe Bootstrap .sticky-top)
+// NAVBAR: menu sticky con apertura su mobile SOLO in CSS
+//
+// Come funziona (nessun JavaScript):
+// 1. Una checkbox nascosta (#menu-toggle) tiene lo stato aperto/chiuso.
+// 2. Il pulsante ☰ è la sua <label>: cliccarlo spunta la checkbox.
+// 3. Con :checked e il selettore fratello ~ mostriamo il menu.
+// La checkbox resta raggiungibile con il Tab e si apre con la barra spaziatrice.
 // =========================================
 
+@use "variables" as *;
+@use "mixins" as *;
+
 .site-nav {
-  background: rgba($color-bg, 0.92);
-  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background: $color-bg;
   border-bottom: 1px solid $color-border;
 
-  .navbar-brand {
-    font-family: $font-heading;
-    font-weight: 700;
-    color: $color-primary;
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    min-height: $nav-height;
   }
 
-  .nav-link {
+  &__brand {
+    font-family: $font-heading;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $color-primary;
+    text-decoration: none;
+  }
+
+  // ---------- Checkbox che memorizza lo stato ----------
+  &__toggle {
+    @include visually-hidden;
+  }
+
+  // ---------- Pulsante hamburger (è la label della checkbox) ----------
+  &__burger {
+    @include flex-center;
+    width: 48px;
+    height: 44px;
+    border: 1px solid $color-field;
+    border-radius: 10px;
+    cursor: pointer;
+
+    @include from-md {
+      display: none;
+    }
+  }
+
+  // Le tre linee: una centrale e due pseudo-elementi
+  &__lines,
+  &__lines::before,
+  &__lines::after {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: $color-primary;
+    border-radius: 2px;
+    transition: transform $transition, background $transition;
+  }
+
+  &__lines {
+    position: relative;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    &::before {
+      top: -7px;
+    }
+
+    &::after {
+      top: 7px;
+    }
+  }
+
+  // Anello di focus sul pulsante quando la checkbox ha il focus da tastiera
+  &__toggle:focus-visible + &__burger {
+    outline: 3px solid $color-accent-text;
+    outline-offset: 2px;
+  }
+
+  // Menu aperto: le tre linee diventano una X
+  &__toggle:checked + &__burger &__lines {
+    background: transparent;
+
+    &::before {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    &::after {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+
+  // ---------- Voci del menu ----------
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    // Chiuso su mobile: altezza zero e voci non raggiungibili
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: max-height 0.3s ease, visibility 0.3s;
+
+    @include from-md {
+      flex-direction: row;
+      flex-basis: auto;
+      gap: 1.5rem;
+      max-height: none;
+      overflow: visible;
+      visibility: visible;
+    }
+  }
+
+  // Aperto: la checkbox spuntata mostra il menu
+  &__toggle:checked ~ &__menu {
+    max-height: 20rem;
+    visibility: visible;
+    padding-bottom: 0.75rem;
+
+    @include from-md {
+      padding-bottom: 0;
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 0.6rem 0;
     font-weight: 500;
     color: $color-ink;
+    text-decoration: none;
     transition: color $transition;
 
     &:hover,
-    &.active {
+    &[aria-current="page"] {
       color: $color-primary;
     }
 
-    &.active {
+    &[aria-current="page"] {
       text-decoration: underline;
       text-decoration-color: $color-accent;
       text-decoration-thickness: 3px;

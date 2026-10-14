@@ -1,0 +1,68 @@
+// =========================================
+// PAGINA CV: layout a griglia, sidebar e timeline
+// =========================================
+
+@use "variables" as *;
+@use "mixins" as *;
+
+// ---------- Layout (CSS GRID) ----------
+.cv-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @include from-md {
+    grid-template-columns: 280px 1fr;
+  }
+}
+
+.cv-sidebar {
+  @include card;
+  padding: 2rem;
+  align-self: start;
+
+  h2 {
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+  }
+
+  // La sidebar è alta circa 800px: resta fissa solo su schermi
+  // larghi E abbastanza alti da contenerla tutta.
+  @include from-lg {
+    @media (min-height: 900px) {
+      position: sticky;
+      top: $nav-height + 24px;
+    }
+  }
+}
+
+// ---------- Timeline ----------
+.timeline {
+  list-style: none;
+  padding-left: 1.5rem;
+  border-left: 3px solid $color-border;
+
+  li {
+    position: relative;
+    margin-bottom: 2rem;
+
+    // Pallino sulla linea
+    &::before {
+      content: "";
+      position: absolute;
+      left: -2.05rem;
+      top: 0.4rem;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: $color-accent;
+      border: 3px solid $color-bg;
+    }
+  }
+
+  .date {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $color-muted;
+  }
+}
